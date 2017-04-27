@@ -1,0 +1,55 @@
+background no
+font sans:size=10
+#xftfont sans:size=10
+use_xft yes
+xftalpha 0.9
+update_interval 1
+imlib_cache_size 0
+total_run_times 0
+own_window yes
+own_window_type dock
+#own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual true
+own_window_argb_value 1000
+own_window_colour 404751
+double_buffer yes
+minimum_size 225 100
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+default_color 101010
+default_shade_color 101010
+alignment top_right
+
+gap_x 17
+gap_y 1020
+no_buffers yes
+cpu_avg_samples 1
+uppercase no
+border_inner_margin 15
+if_up_strictness link
+
+#colors
+color1 2096F3
+color2 2096F3
+color3 a3a6af
+
+
+
+TEXT
+${color1}${font Oswald:size=15:bold}NETWORK ${color2} ${hr 2}
+${color3}${font Open Sans:size=11}
+Local IP: $alignr${addr enp0s31f6}
+Public IP: $alignr${exec curl -s ident.me| sed -e 's/.*Current IP Address: //' -e 's/<.*$//'}
+DNS: $alignr${exec cat /etc/resolv.conf | grep nameserver | head -n 1 | awk '{print $2}'}
+Ethernet: $alignr[${if_up enp0s31f6}${color green}connected${else}${color red}DISCONNECTED${endif}${color}${color3}]
+City: $alignr${execi 3600 curl -s ipinfo.io/city}
+Region: $alignr${execi 3600 curl -s ipinfo.io/region}
+Country: $alignr${execi 3600 curl -s ipinfo.io/country}
+Coords: $alignr${execi 3600 curl -s ipinfo.io/loc}
+${font Open Sans:size=10}
+Down: ${downspeed enp0s31f6} ${alignr}Up: ${upspeed enp0s31f6}
+${color1}${downspeedgraph enp0s31f6 20,90 444444 eeeeee}${alignr}${color1}${upspeedgraph enp0s31f6 20,90 444444 eeeeee }
+${color3}  Total: ${totaldown enp0s31f6} ${alignr}Total: ${totalup enp0s31f6}
