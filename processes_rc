@@ -40,7 +40,7 @@ ${color1}${font Oswald:size=15:bold}PROCESSES ${color2} ${hr 2}
 ${color3}${font Open Sans:size=11}
 Model: $alignr${execi 10000 cat /proc/cpuinfo | grep "model name" | sed -e 's/model name.*: //'| uniq | cut -c 19-26}
 Frequency: $alignr${execi 10000 cat /proc/cpuinfo | grep "model name" | sed -e 's/model name.*: //'| uniq | cut -c 34-40}
-CPU Temp : $alignr${exec sensors | grep 'Physical' | awk '{print $4}' | cut -c2-3}°C
+CPU Temp : $alignr${exec sensors | grep 'Package' | awk '{print $4}' | cut -c2-3}°C
 CPU Clock Speed: ${alignr}${freq_g} GHz
 Total Processes: ${alignr}$processes ($running_processes running)
 ${color3}CPU : ${cpu cpu0}% ${alignr}${color1}${cpubar cpu0 6,140}
