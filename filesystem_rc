@@ -25,7 +25,7 @@ default_outline_color green
 alignment top_right
 
 gap_x 17
-gap_y 1500
+gap_y 150
 no_buffers yes
 cpu_avg_samples 1
 uppercase no
@@ -39,11 +39,11 @@ color3 a3a6af
 TEXT
 ${color1}${font Oswald:size=15:bold}FILESYSTEM ${color2} ${hr 2}
 
-${color3}${font Open Sans:size=11}root${alignr}${font Open Sans:size=10}${fs_used_perc /}%  ${color1}${fs_bar 6, 140 /}
-$alignr${color3}${font Open Sans:pixelsize=13}${alignc 49}${fs_used /} / ${fs_size /}
-${color3}${font Open Sans:size=11}home${alignr}${font Open Sans:size=10}${fs_used_perc /home}%  ${color1}${fs_bar 6, 140 /home}
-$alignr${color3}${font Open Sans:pixelsize=13}${alignc 49}${fs_used /home} / ${fs_size /home}
-${color3}${font Open Sans:size=11}data${alignr}${font Open Sans:size=10}${fs_used_perc /mnt/data}%  ${color1}${fs_bar 6, 140 /mnt/data}
-$alignr${color3}${font Open Sans:pixelsize=13}${alignc 49}${fs_used /mnt/data} / ${fs_size /mnt/data}
-${color3}${font Open Sans:size=11}nas${alignr}${font Open Sans:size=10}${fs_used_perc /mnt/movies}%  ${color1}${fs_bar 6, 140 /mnt/movies}
-$alignr${color3}${font Open Sans:pixelsize=13}${alignc 49}${fs_used /mnt/movies} / ${fs_size /mnt/movies}
+${color3}${font Open Sans:size=10}root${alignr}${font Open Sans:size=9}${fs_used_perc /}%  ${color1}${fs_bar 6, 140 /}
+$alignr${color3}${font Open Sans:pixelsize=12}${alignc 49}${fs_used /} / ${fs_size /}
+${color3}${font Open Sans:size=10}home${alignr}${font Open Sans:size=9}${fs_used_perc /home}%  ${color1}${fs_bar 6, 140 /home}
+$alignr${color3}${font Open Sans:pixelsize=12}${alignc 49}${fs_used /home} / ${fs_size /home}
+${color3}${font Open Sans:size=10}data${alignr}${font Open Sans:size=9}${fs_used_perc /mnt/data}%  ${color1}${fs_bar 6, 140 /mnt/data}
+$alignr${color3}${font Open Sans:pixelsize=12}${alignc 49}${fs_used /mnt/data} / ${fs_size /mnt/data}
+${color3}${font Open Sans:size=10}nas${alignr}${font Open Sans:size=9}${fs_used_perc /mnt/movies}%  ${color1}${fs_bar 6, 140 /mnt/movies}
+$alignr${color3}${font Open Sans:pixelsize=12}${alignc 49}${fs_used /mnt/movies} / ${fs_size /mnt/movies}

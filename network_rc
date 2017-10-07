@@ -23,8 +23,8 @@ default_color 101010
 default_shade_color 101010
 alignment top_right
 
-gap_x 17
-gap_y 1020
+gap_x 1677
+gap_y 370
 no_buffers yes
 cpu_avg_samples 1
 uppercase no
@@ -36,20 +36,18 @@ color1 2096F3
 color2 2096F3
 color3 a3a6af
 
-
-
 TEXT
 ${color1}${font Oswald:size=15:bold}NETWORK ${color2} ${hr 2}
 ${color3}${font Open Sans:size=11}
-Local IP: $alignr${addr enp0s31f6}
+Local IP: $alignr${addr wlan0}
 Public IP: $alignr${exec curl -s ident.me| sed -e 's/.*Current IP Address: //' -e 's/<.*$//'}
 DNS: $alignr${exec cat /etc/resolv.conf | grep nameserver | head -n 1 | awk '{print $2}'}
-Ethernet: $alignr[${if_up enp0s31f6}${color green}connected${else}${color red}DISCONNECTED${endif}${color}${color3}]
-City: $alignr${execi 3600 curl -s ipinfo.io/city}
-Region: $alignr${execi 3600 curl -s ipinfo.io/region}
-Country: $alignr${execi 3600 curl -s ipinfo.io/country}
-Coords: $alignr${execi 3600 curl -s ipinfo.io/loc}
+Wifi: $alignr[${if_up wlp3s0}${color green}connected${else}${color red}DISCONNECTED${endif}${color}${color3}]
+City: $alignr${execi 3600 curl -s freegeoip.net/json/ | jq '.city' | sed 's/["]//g'}
+Region: $alignr${execi 3600 curl -s freegeoip.net/json/ | jq '.region_name' | sed 's/["]//g'}
+Country: $alignr${execi 3600 curl -s freegeoip.net/json/ | jq '.country_code' | sed 's/["]//g'}
+Coords: $alignr${execi 3600 curl -s freegeoip.net/json/ | jq '.latitude'}, ${execi 3600 curl -s freegeoip.net/json/ | jq '.longitude'}
 ${font Open Sans:size=10}
-Down: ${downspeed enp0s31f6} ${alignr}Up: ${upspeed enp0s31f6}
-${color1}${downspeedgraph enp0s31f6 20,90 444444 eeeeee}${alignr}${color1}${upspeedgraph enp0s31f6 20,90 444444 eeeeee }
+Down: ${downspeed wlp3s0} ${alignr}Up: ${upspeed wlp3s0}
+${color1}${downspeedgraph wlp3s0 20,90 444444 eeeeee}${alignr}${color1}${upspeedgraph wlp3s0 20,90 444444 eeeeee }
 ${color3}  Total: ${totaldown enp0s31f6} ${alignr}Total: ${totalup enp0s31f6}

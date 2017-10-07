@@ -11,7 +11,7 @@ own_window_type dock
 #own_window_transparent yes
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 own_window_argb_visual true
-own_window_argb_value 1000
+#own_window_argb_value 1000
 own_window_colour 404751
 double_buffer yes
 minimum_size 225
@@ -23,8 +23,8 @@ default_color 101010
 default_shade_color 101010
 alignment top_right
 
-gap_x 17
-gap_y 530
+gap_x 1677
+gap_y 670
 no_buffers yes
 cpu_avg_samples 1
 uppercase no
@@ -37,7 +37,7 @@ color3 a3a6af
 
 TEXT
 ${color1}${font Oswald:size=15:bold}PROCESSES ${color2} ${hr 2}
-${color3}${font Open Sans:size=11}
+${color3}${font Open Sans:size=10}
 Model: $alignr${execi 10000 cat /proc/cpuinfo | grep "model name" | sed -e 's/model name.*: //'| uniq | cut -c 19-26}
 Frequency: $alignr${execi 10000 cat /proc/cpuinfo | grep "model name" | sed -e 's/model name.*: //'| uniq | cut -c 34-40}
 CPU Temp : $alignr${exec sensors | grep 'Package' | awk '{print $4}' | cut -c2-3}°C
@@ -48,10 +48,6 @@ ${color3}CPU1: ${cpu cpu1}% ${alignr}${color1}${cpubar cpu1 6,140}
 ${color3}CPU2: ${cpu cpu2}% ${alignr}${color1}${cpubar cpu2 6,140}
 ${color3}CPU3: ${cpu cpu3}% ${alignr}${color1}${cpubar cpu3 6,140}
 ${color3}CPU4: ${cpu cpu4}% ${alignr}${color1}${cpubar cpu4 6,140}
-${color3}CPU5: ${cpu cpu5}% ${alignr}${color1}${cpubar cpu5 6,140}
-${color3}CPU6: ${cpu cpu6}% ${alignr}${color1}${cpubar cpu6 6,140}
-${color3}CPU7: ${cpu cpu7}% ${alignr}${color1}${cpubar cpu7 6,140}
-${color3}CPU8: ${cpu cpu8}% ${alignr}${color1}${cpubar cpu8 6,140}
 
 ${color3}Top Processes:
 ${font Open Sans:pixelsize=10}Name: $alignr PID   CPU   MEM
