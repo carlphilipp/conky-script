@@ -23,8 +23,8 @@ default_color 101010
 default_shade_color 101010
 alignment top_right
 
-gap_x 1677
-gap_y 170
+gap_x 20
+gap_y 55
 no_buffers yes
 cpu_avg_samples 1
 uppercase no
@@ -36,12 +36,49 @@ color2 2096F3
 color3 a3a6af
 
 TEXT
+${color1}${font Oswald:size=15:bold}TIME ${color2} ${hr 2} ${color3}${font}
+${color3}${font Oswald:pixelsize=60}${alignr}${time %H:%M}${font}
+${color3}${font Oswald:pixelsize=13}${alignr}${time %A %x}${font}
+
 ${color1}${font Oswald:size=15:bold}SYSTEM ${color2} ${hr 2}
-${color3}${font Open Sans:size=11}
-Hostname: $alignr$nodename
-Distribution: $alignr${execi 10000 cat /etc/issue | grep Linux | cut -c -14}
-Architecture: $alignr${execi 10000 uname -m}
-Kernel: $alignr$kernel
-Uptime: $alignr$uptime
-Computer: $alignr${nodename}
-User: $alignr${uid_name 1000}
+${color3}${font Open Sans:size=10}Hostname$alignr$nodename
+Distribution$alignr${execi 10000 cat /etc/issue | grep Linux | cut -c -14}
+Architecture$alignr${execi 10000 uname -m}
+Kernel$alignr$kernel
+Uptime$alignr$uptime
+Computer$alignr${nodename}
+User$alignr${uid_name 1000}
+
+${color1}${font Oswald:size=15:bold}MEMORY ${color2} ${hr 2}
+${color3}${font Open Sans:size=10}ram${alignr}${font Open Sans:size=9}${memperc}% ${alignr}${color1}${membar 5,140}
+$alignr${color3}${font Open Sans:pixelsize=12}${alignc}${mem} / ${memmax}
+
+${color1}${font Oswald:size=15:bold}FILESYSTEM ${color2} ${hr 2}
+${color3}${font Open Sans:size=10}hd${alignr}${font Open Sans:size=9}${fs_used_perc /}%  ${color1}${fs_bar 6, 140 /}
+$alignr${color3}${font Open Sans:pixelsize=12}${alignc 49}${fs_used /} / ${fs_size /}
+
+${color1}${font Oswald:size=15:bold}NETWORK ${color2} ${hr 2}
+${color3}${font Open Sans:size=10}Local IP$alignr${addr wlan0}
+Public IP$alignr${exec curl -s ident.me| sed -e 's/.*Current IP Address: //' -e 's/<.*$//'}
+DNS$alignr${exec cat /etc/resolv.conf | grep nameserver | head -n 1 | awk '{print $2}'}
+Wifi$alignr[${if_up wlp3s0}${color green}connected${else}${color red}DISCONNECTED${endif}${color}${color3}]
+City$alignr${execi 3600 curl -s freegeoip.net/json/ | jq '.city' | sed 's/["]//g'}
+Region$alignr${execi 3600 curl -s freegeoip.net/json/ | jq '.region_name' | sed 's/["]//g'}
+Country$alignr${execi 3600 curl -s freegeoip.net/json/ | jq '.country_code' | sed 's/["]//g'}
+Coords$alignr${execi 3600 curl -s freegeoip.net/json/ | jq '.latitude'}, ${execi 3600 curl -s freegeoip.net/json/ | jq '.longitude'}
+${font Open Sans:size=9}
+Down  ${downspeed wlp3s0} ${alignr}Up  ${upspeed wlp3s0}
+${color1}${downspeedgraph wlp3s0 20,90 444444 eeeeee}${alignr}${color1}${upspeedgraph wlp3s0 20,90 444444 eeeeee }
+${color3}  Total: ${totaldown enp0s31f6} ${alignr}Total: ${totalup enp0s31f6}
+
+${color1}${font Oswald:size=15:bold}PROCESSES ${color2} ${hr 2}
+${color3}${font Open Sans:size=10}Model: $alignr${execi 10000 cat /proc/cpuinfo | grep "model name" | sed -e 's/model name.*: //'| uniq | cut -c 19-26}
+Frequency: $alignr${execi 10000 cat /proc/cpuinfo | grep "model name" | sed -e 's/model name.*: //'| uniq | cut -c 34-40}
+CPU Temp : $alignr${exec sensors | grep 'Physical' | awk '{print $4}' | cut -c2-3}°C
+CPU Clock Speed: ${alignr}${freq_g} GHz
+Total Processes: ${alignr}$processes ($running_processes running)
+${color3}CPU${alignr}${cpu cpu0}% ${color1}${cpubar cpu0 6,140}
+${color3}CPU1${alignr}${cpu cpu1}% ${color1}${cpubar cpu1 6,140}
+${color3}CPU2${alignr}${cpu cpu2}% ${color1}${cpubar cpu2 6,140}
+${color3}CPU3${alignr}${cpu cpu3}% ${color1}${cpubar cpu3 6,140}
+${color3}CPU4${alignr}${cpu cpu4}% ${color1}${cpubar cpu4 6,140}
